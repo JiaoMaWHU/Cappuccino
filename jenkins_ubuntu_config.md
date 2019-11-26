@@ -6,7 +6,7 @@
 # 使用Jenkins-cli
 找到Jenkins-cli的位置。默认位于/var/cache/jenkins/war/WEB-INF/。
 ```
-sudo find / -name "cli.jar"
+sudo find / -name "*cli.jar"
 ```
 试验是否可用。可用则显示cli的选项及功能
 ```
