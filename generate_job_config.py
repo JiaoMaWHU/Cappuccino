@@ -8,11 +8,7 @@ def generate_config_from_input():
     print("please enter your workspace directory: ")
     dir = raw_input()
     dir = dir if dir else "/home/chen/workspace/sample2"
-<<<<<<< HEAD
     print("please enter your test tasks: (tap y to activate)")
-=======
-    print("please enter your test tasks: (tap yes to activate)")
->>>>>>> b6893cff1cfc600451610ae5ffdd7508cfa31775
     print("nosetest: y/n?")
     flag = raw_input()
     nosetest_activated = True if flag == "y" else False
