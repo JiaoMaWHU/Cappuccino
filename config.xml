@@ -1,10 +1,9 @@
-<?xml version='1.1' encoding='UTF-8'?>
 <project>
-  <actions/>
-  <description></description>
+  <actions />
+  <description />
   <keepDependencies>false</keepDependencies>
-  <properties/>
-  <scm class="hudson.scm.NullSCM"/>
+  <properties />
+  <scm class="hudson.scm.NullSCM" />
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -21,17 +20,10 @@
 
   <builders>
     <hudson.tasks.Shell>
-      <command>#!/bin/sh
-which python
-sudo pip list
-cd /home/chen/workspace/sample
-sudo /home/chen/.local/bin/nosetests --with-coverage --cover-inclusive
-sudo /home/chen/.local/bin/coverage xml
-sudo /home/chen/.local/bin/pylint -f parseable -d I0011,R0801 sample | tee pylint.out
-</command>
+      <command>cd g</command>
     </hudson.tasks.Shell>
   </builders>
 
-  <publishers/>
-  <buildWrappers/>
+  <publishers />
+  <buildWrappers />
 </project>
