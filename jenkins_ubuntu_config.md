@@ -3,6 +3,9 @@
 参照`https://juejin.im/post/5b6329c2e51d4519044ab85f`<br>
 需记录初始化的账号和密码
 
+# tmp
+https://jenkins.io/doc/book/managing/cli/#using-the-cli-client
+
 # 使用Jenkins-cli
 找到Jenkins-cli的位置。默认位于/var/cache/jenkins/war/WEB-INF/。
 ```
