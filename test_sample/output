@@ -1,0 +1,26 @@
+
+Name                      Stmts   Miss  Cover
+---------------------------------------------
+test_sample/__init__.py       0      0   100%
+test_sample/test.py          14     12    14%
+---------------------------------------------
+TOTAL                        14     12    14%
+----------------------------------------------------------------------
+Ran 0 tests in 0.008s
+
+OK
+************* Module test_sample.test
+test_sample/test.py:13: [C0325(superfluous-parens), ] Unnecessary parens after 'print' keyword
+test_sample/test.py:17: [C0325(superfluous-parens), ] Unnecessary parens after 'print' keyword
+test_sample/test.py:18: [C0304(missing-final-newline), ] Final newline missing
+test_sample/test.py:1: [C0111(missing-docstring), ] Missing module docstring
+test_sample/test.py:3: [C0111(missing-docstring), login] Missing function docstring
+test_sample/test.py:12: [W0703(broad-except), login] Catching too general exception Exception
+test_sample/test.py:8: [R1703(simplifiable-if-statement), login] The if statement can be replaced with 'return bool(test)'
+test_sample/test.py:8: [R1705(no-else-return), login] Unnecessary "else" after "return"
+test_sample/test.py:12: [W0612(unused-variable), login] Unused variable 'exc'
+test_sample/test.py:16: [C0111(missing-docstring), logout] Missing function docstring
+
+------------------------------------------------------------------
+Your code has been rated at 2.86/10 (previous run: 2.86/10, +0.00)
+
