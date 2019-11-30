@@ -5,3 +5,4 @@ This tool makes testing easy. Go have a cup of your favorite Cappuccino and wait
 
 1. Make sure you have installed the packages in requirement.txt
 2. Use --help to see the format of input (note the slash in the dir)
+3. Remember to change the password in Cappuccino.py
