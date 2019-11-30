@@ -1,49 +1,42 @@
 # run in Python2 environment
 from xml.etree.ElementTree import parse
+import os
 
-def generate_config_from_input():
-    print("please enter your job name: ")
+def generate_config_from_input(args):
+    # output the banner for Cappuccino
+    banner = open('banner.txt','r')
+    lines = banner.read()
+    print(lines)
+    banner.close()
+
+    # configuration for testing job
+    print("Enter the name for your testing job: ")
     job_name = raw_input()
-
-    print("please enter your workspace directory: ")
-    dir = raw_input()
-    dir = dir if dir else "/home/chen/workspace/sample2"
-    print("please enter your test tasks: (tap y to activate)")
-    print("nosetest: y/n?")
+    print("Use nosetest: y/n?")
     flag = raw_input()
     nosetest_activated = True if flag == "y" else False
-    print("coverage: y/n?")
-    flag = raw_input()
-    coverage_activated = True if flag == "y" else False
-    print("pylint: y/n?")
+    print("Use pylint: y/n?")
     flag = raw_input()
     pylint_activated = True if flag == "y" else False
 
-    PYTHON_PATH = "/home/chen/.local/bin/"
-
-    ENTER_WORKSPACE = "cd {}".format(dir)   
-    NOSETEST = "sudo {}nosetests --with-coverage --cover-inclusive".format(PYTHON_PATH)
-    COVERAGE_REPORT = "sudo {}coverage xml".format(PYTHON_PATH)
-    PYLINT = "sudo {}pylint -f parseable -d I0011,R0801 sample | tee pylint.out".format(PYTHON_PATH)
-
-
+    # generate xml configuration
+    dir = args.dir
+    project_name = os.path.basename(os.path.normpath(dir))
+    ENTER_WORKSPACE = "cd {}../".format(dir)
+    NOSETEST = "nosetests --with-coverage --cover-inclusive --cover-package={} > {}output 2>&1".format(project_name, dir)
+    PYLINT = "pylint -f parseable -d I0011,R0801 {} | tee -a {}output".format(project_name, dir)
     raw_instructions = [ENTER_WORKSPACE]
     if nosetest_activated:
         raw_instructions.append(NOSETEST)
-    if coverage_activated:
-        raw_instructions.append(COVERAGE_REPORT)
     if pylint_activated:
         raw_instructions.append(PYLINT)
-
     instructions = "\n".join(raw_instructions)
-    print("command shell:")
-    print(instructions)
+    print("Your testing configuration:")
 
-    tree = parse("./config_template.xml")
+    # create xml file
+    tree = parse("config_template.xml")
     e = tree.find("builders/hudson.tasks.Shell/command")
-    # e = doc.find("actions")
     e.text = instructions
-
-    tree.write("./config.xml")
+    tree.write("config.xml")
 
     return job_name, dir
