@@ -18,6 +18,9 @@ def generate_config_from_input(args):
     print("Use pylint: y/n?")
     flag = raw_input()
     pylint_activated = True if flag == "y" else False
+    print("Enter your github repo URL, empty means using local files")
+    github_url = raw_input()
+    github_flag = True if github_url else False 
 
     # generate xml configuration
     dir = args.dir
@@ -37,6 +40,11 @@ def generate_config_from_input(args):
     tree = parse("config_template.xml")
     e = tree.find("builders/hudson.tasks.Shell/command")
     e.text = instructions
+    # set github repo
+    if github_flag:
+        e = tree.find("scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url")
+        e.text = github_url
+
     tree.write("config.xml")
 
     return job_name, dir
