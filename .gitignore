@@ -2,7 +2,7 @@ script/
 tests/
 .idea/
 
-test_sample/*
+./test_sample/output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

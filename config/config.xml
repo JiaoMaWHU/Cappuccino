@@ -1,21 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-  <actions/>
-  <description/>
+<project>
+  <actions />
+  <description />
   <keepDependencies>false</keepDependencies>
-  <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>Your Github Repo URL</url>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-  </scm>
+  <properties />
+  <scm class="hudson.scm.NullSCM">
+    </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -38,6 +27,6 @@ pylint -f parseable -d I0011,R0801 test_sample | tee -a /home/class/Desktop/test
     </hudson.tasks.Shell>
   </builders>
 
-  <publishers/>
-  <buildWrappers/>
+  <publishers />
+  <buildWrappers />
 </project>

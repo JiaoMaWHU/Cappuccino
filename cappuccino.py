@@ -2,14 +2,13 @@
 import os
 import generate_job_config
 import argparse
+import json
 from xml.etree.ElementTree import parse
 
 def args_parse():
-    parser = argparse.ArgumentParser(description='Cappuccino args parser')
-    parser.add_argument('user', help='Jenkins user name')
-    parser.add_argument('password', help='Jenkins user password')
-    parser.add_argument('port', help='Jenkins running port')
-    return parser.parse_args()
+    with open('config/jenkins.json') as json_data_file:
+        cfg = json.load(json_data_file)
+    return cfg['jenkins']
 
 def execute_sudo_command(command):
     sudo_password = 'majinxin'
@@ -22,7 +21,7 @@ def build(args):
     print(lines)
     banner.close()
     prefix = 'sudo java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar\
-            -auth {}:{} -s http://localhost:{}'.format(args.user, args.password, args.port)
+            -auth {}:{} -s http://localhost:{}'.format(args['user'], args['password'], args['port'])
 
     print("=== Enter \"New\" to build a new job, \"List\" to build exisitng jobs ===")
     flag = raw_input()
@@ -41,13 +40,13 @@ def build(args):
         execute_sudo_command("sudo chmod 777 {}".format(workspace))
 
         # create job
-        CREATE_JOB = prefix + ' create-job {} < config.xml'.format(job_name)
+        CREATE_JOB = prefix + ' create-job {} < config/config.xml'.format(job_name)
         execute_sudo_command(CREATE_JOB)
 
     # get job output path
-    JOB_INFO = prefix + ' get-job {} > getconfig.xml'.format(job_name)
+    JOB_INFO = prefix + ' get-job {} > config/getconfig.xml'.format(job_name)
     execute_sudo_command(JOB_INFO)
-    tree = parse('getconfig.xml')
+    tree = parse('config/getconfig.xml')
     e = tree.find("builders/hudson.tasks.Shell/command")
     path = e.text.split()[1]
 

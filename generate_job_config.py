@@ -48,7 +48,7 @@ def generate_config_from_input():
     instructions = "\n".join(raw_instructions)
 
     # create xml file
-    tree = parse("config_template.xml")
+    tree = parse("config/config_template.xml")
     e = tree.find("builders/hudson.tasks.Shell/command")
     e.text = instructions
     # set github repo
@@ -62,6 +62,6 @@ def generate_config_from_input():
         e.attrib.pop("plugin", None)
         e.set("class", "hudson.scm.NullSCM")
 
-    tree.write("config.xml")
+    tree.write("config/config.xml")
 
     return job_name, dir
