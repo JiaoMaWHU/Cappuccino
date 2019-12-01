@@ -1,0 +1,7 @@
+{
+    "jenkins": {
+        "user": "majinxin",
+        "password": "majinxin",
+        "port": 8081
+    }
+}

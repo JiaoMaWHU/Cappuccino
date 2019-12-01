@@ -1,0 +1,32 @@
+<project>
+  <actions />
+  <description />
+  <keepDependencies>false</keepDependencies>
+  <properties />
+  <scm class="hudson.scm.NullSCM">
+    </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  
+  <concurrentBuild>false</concurrentBuild>
+
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd /home/class/Desktop/testing/cap/test_sample/../
+nosetests --cover-package=test_sample --cover-inclusive --with-coverage --cover-erase -v --traverse-namespace &gt; /home/class/Desktop/testing/cap/test_sample/output 2&gt;&amp;1
+pylint -f parseable -d I0011,R0801 test_sample | tee -a /home/class/Desktop/testing/cap/test_sample/output</command>
+    </hudson.tasks.Shell>
+  </builders>
+
+  <publishers />
+  <buildWrappers />
+</project>

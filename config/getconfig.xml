@@ -1,9 +1,10 @@
-<project>
-  <actions />
-  <description />
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
   <keepDependencies>false</keepDependencies>
-  <properties />
-  <scm class="hudson.scm.NullSCM" />
+  <properties/>
+  <scm class="hudson.scm.NullSCM">
+    </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -21,11 +22,11 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd /home/class/Desktop/testing/cap/test_sample/../
-nosetests --with-coverage --cover-inclusive --cover-package=test_sample &gt; /home/class/Desktop/testing/cap/test_sample/output 2&gt;&amp;1
+nosetests --cover-package=test_sample --cover-inclusive --with-coverage --cover-erase -v --traverse-namespace &gt; /home/class/Desktop/testing/cap/test_sample/output 2&gt;&amp;1
 pylint -f parseable -d I0011,R0801 test_sample | tee -a /home/class/Desktop/testing/cap/test_sample/output</command>
     </hudson.tasks.Shell>
   </builders>
 
-  <publishers />
-  <buildWrappers />
+  <publishers/>
+  <buildWrappers/>
 </project>
