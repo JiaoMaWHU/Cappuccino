@@ -9,11 +9,11 @@ def args_parse():
     parser.add_argument('user', help='Jenkins user name')
     parser.add_argument('password', help='Jenkins user password')
     parser.add_argument('port', help='Jenkins running port')
-    parser.add_argument('dir', help='Test code directory, end with slash')
+    parser.add_argument('dir', help='Test code and  directory, end with slash')
     return parser.parse_args()
 
 def execute_sudo_command(command):
-    sudo_password = 'majinxin'
+    sudo_password = '296019'
     os.system('echo %s|sudo -S %s' % (sudo_password, command))
 
 def build(args):
@@ -30,6 +30,8 @@ def build(args):
             -auth {}:{} -s http://localhost:{}'.format(args.user, args.password, args.port)
     CREATE_JOB = prefix + ' create-job {} < config.xml'.format(job_name)
     execute_sudo_command(CREATE_JOB)
+
+
 
     # build job
     BUILD_JOB = prefix + ' build {}'.format(job_name)
