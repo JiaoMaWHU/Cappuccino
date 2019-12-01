@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 import generate_job_config
-import argparse
 import json
 from xml.etree.ElementTree import parse
 
@@ -11,7 +10,10 @@ def args_parse():
     return cfg['jenkins']
 
 def execute_sudo_command(command):
-    sudo_password = 'majinxin'
+    with open('config/jenkins.json') as json_data_file:
+        cfg = json.load(json_data_file)
+    sudo_password = cfg['sudo_password']
+
     os.system('echo %s|sudo -S %s' % (sudo_password, command))
 
 def build(args):
@@ -48,7 +50,7 @@ def build(args):
     execute_sudo_command(JOB_INFO)
     tree = parse('config/getconfig.xml')
     e = tree.find("builders/hudson.tasks.Shell/command")
-    path = e.text.split()[1]
+    path = e.text.split()[1][:-4]
 
 
     # build job

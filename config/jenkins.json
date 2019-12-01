@@ -1,7 +1,8 @@
 {
     "jenkins": {
-        "user": "majinxin",
-        "password": "majinxin",
-        "port": 8081
-    }
+        "user": "",
+        "password": "",
+        "port": 8080
+    },
+    "sudo_password": ""
 }

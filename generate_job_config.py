@@ -1,6 +1,7 @@
 # run in Python2 environment
 from xml.etree.ElementTree import parse
 import os
+from generate_unit_tests import generate_unit_tests_from_json
 
 def generate_config_from_input():
     # generate xml configuration
@@ -20,6 +21,11 @@ def generate_config_from_input():
 
     print("=== Enter the name for your job: ===")
     job_name = raw_input()
+
+    # generate unit test
+    print("generate unit tests from your json file: y/n?")
+    flag = raw_input()
+    generate_unit_tests_activated = True if flag == "y" else False
 
     print("** Include code coverage? y/n")
     flag = raw_input()
@@ -45,12 +51,14 @@ def generate_config_from_input():
     NOSETEST += '> {}output 2>&1'.format(dir)
     raw_instructions.append(NOSETEST)
     raw_instructions.append(PYLINT)
+
     instructions = "\n".join(raw_instructions)
 
     # create xml file
     tree = parse("config/config_template.xml")
     e = tree.find("builders/hudson.tasks.Shell/command")
     e.text = instructions
+
     # set github repo
     if github_flag:
         e = tree.find("scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url")
@@ -62,6 +70,16 @@ def generate_config_from_input():
         e.attrib.pop("plugin", None)
         e.set("class", "hudson.scm.NullSCM")
 
+        # root = tree.getroot()
+        # e = root.find("scm")
+        # root.remove(e)
+
+
     tree.write("config/config.xml")
+
+    # generate unit tests from user json
+    if generate_unit_tests_activated:
+        generate_unit_tests_from_json(dir)
+
 
     return job_name, dir
