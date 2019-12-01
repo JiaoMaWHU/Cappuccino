@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# use ' instead of "
 import os
 import generate_job_config
 import argparse
