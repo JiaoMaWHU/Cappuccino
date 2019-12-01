@@ -55,6 +55,12 @@ def generate_config_from_input():
     if github_flag:
         e = tree.find("scm/userRemoteConfigs/hudson.plugins.git.UserRemoteConfig/url")
         e.text = github_url
+    else:
+        e = tree.find("scm")
+        for child in list(e):
+            e.remove(child)
+        e.attrib.pop("plugin", None)
+        e.set("class", "hudson.scm.NullSCM")
 
     tree.write("config.xml")
 
