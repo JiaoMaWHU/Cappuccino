@@ -1,8 +1,8 @@
-<project>
-  <actions />
-  <description />
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
   <keepDependencies>false</keepDependencies>
-  <properties />
+  <properties/>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@4.0.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
@@ -38,6 +38,6 @@ pylint -f parseable -d I0011,R0801 test_sample | tee -a /home/class/Desktop/test
     </hudson.tasks.Shell>
   </builders>
 
-  <publishers />
-  <buildWrappers />
+  <publishers/>
+  <buildWrappers/>
 </project>
