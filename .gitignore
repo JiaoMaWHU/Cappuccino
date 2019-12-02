@@ -1,6 +1,7 @@
 script/
 tests/
 .idea/
+config/jenkins.json
 
 ./test_sample/output
 

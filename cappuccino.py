@@ -50,7 +50,7 @@ def build(args):
     execute_sudo_command(JOB_INFO)
     tree = parse('config/getconfig.xml')
     e = tree.find("builders/hudson.tasks.Shell/command")
-    path = e.text.split()[1][:-4]
+    path = e.text.split()[1]
 
 
     # build job
