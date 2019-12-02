@@ -1,8 +1,17 @@
 import json
 import os
 import shutil
+import argparse
 
-def generate_unit_tests_from_json(dir):
+def args_parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(action='store', dest='dir',
+                        help='Store a simple value')
+    return parser.parse_args()
+
+def generate_unit_tests_from_json(args):
+    dir = args.dir
+
     # directory to store unit test file
     folder = os.path.exists(dir + "tests")
     if folder:
@@ -49,3 +58,6 @@ def generate_unit_tests_from_json(dir):
                 f.write("\n")
 
 
+if __name__ == '__main__':
+    args = args_parse()
+    generate_unit_tests_from_json(args)

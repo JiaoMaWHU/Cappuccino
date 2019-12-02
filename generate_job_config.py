@@ -50,6 +50,13 @@ def generate_config_from_input():
     if flag == "n":
         PYLINT = ''
 
+    # generate unit tests from user json
+    if generate_unit_tests_activated:
+        # generate_unit_tests_from_json(dir)
+        current_path = os.getcwd()
+        GENERATE_UNIT_TESTS = "python {}/generate_unit_tests.py {}".format(current_path, dir)
+        raw_instructions.append(GENERATE_UNIT_TESTS)
+
     NOSETEST += '> {}output 2>&1'.format(dir)
     raw_instructions.append(NOSETEST)
     raw_instructions.append(MOVEBACK)
@@ -75,8 +82,6 @@ def generate_config_from_input():
 
     tree.write("config/config.xml")
 
-    # generate unit tests from user json
-    if generate_unit_tests_activated:
-        generate_unit_tests_from_json(dir)
+
 
     return job_name, dir
