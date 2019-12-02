@@ -20,7 +20,6 @@ def generate_unit_tests_from_json(dir):
     for i in range(len(desps)):
         desp = desps[i]
         dir = desp["dir"]
-        #print(dir)
         f.write("import {}\n".format(dir))
 
     class_counter = 0   # generate 1 class for every python file

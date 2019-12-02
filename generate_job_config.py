@@ -8,9 +8,10 @@ def generate_config_from_input():
     print("=== Enter the path for test repo ===")
     dir = raw_input()
     project_name = os.path.basename(os.path.normpath(dir))
-    ENTER_WORKSPACE = "cd {}../".format(dir)
-    NOSETEST = "nosetests --cover-package={} --cover-inclusive ".format(project_name)
+    ENTER_WORKSPACE = "cd {}".format(dir)
+    NOSETEST = "nosetests --cover-inclusive "
     # fixme: problem here, only support cover package here 
+    MOVEBACK = " cd ../ "
     PYLINT = "pylint -f parseable -d I0011,R0801 {} | tee -a {}output".format(project_name, dir)
     raw_instructions = [ENTER_WORKSPACE]
 
@@ -23,7 +24,7 @@ def generate_config_from_input():
     job_name = raw_input()
 
     # generate unit test
-    print("generate unit tests from your json file: y/n?")
+    print("** Generate unit tests from your json file: y/n? **")
     flag = raw_input()
     generate_unit_tests_activated = True if flag == "y" else False
 
@@ -31,18 +32,19 @@ def generate_config_from_input():
     flag = raw_input()
     if flag == "y":
         NOSETEST += '--with-coverage '
-    print("** Clean previous statistics? y/n")
-    flag = raw_input()
-    if flag == "y":
-        NOSETEST += '--cover-erase '
-    print("** Be more verbose? y/n")
-    flag = raw_input()
-    if flag == "y":
-        NOSETEST += '-v '
-    print("** Traverse through all path entries of a namespace package? y/n")
-    flag = raw_input()
-    if flag == "y":
-        NOSETEST += '--traverse-namespace '
+        print("** Clean previous statistics? y/n")
+        flag = raw_input()
+        if flag == "y":
+            NOSETEST += '--cover-erase '
+        print("** Be more verbose? y/n")
+        flag = raw_input()
+        if flag == "y":
+            NOSETEST += '-v '
+        print("** Traverse through all path entries of a namespace package? y/n")
+        flag = raw_input()
+        if flag == "y":
+            NOSETEST += '--traverse-namespace '
+
     print("** Include code style check? y/n")
     flag = raw_input()
     if flag == "n":
@@ -50,6 +52,7 @@ def generate_config_from_input():
 
     NOSETEST += '> {}output 2>&1'.format(dir)
     raw_instructions.append(NOSETEST)
+    raw_instructions.append(MOVEBACK)
     raw_instructions.append(PYLINT)
 
     instructions = "\n".join(raw_instructions)
@@ -70,16 +73,10 @@ def generate_config_from_input():
         e.attrib.pop("plugin", None)
         e.set("class", "hudson.scm.NullSCM")
 
-        # root = tree.getroot()
-        # e = root.find("scm")
-        # root.remove(e)
-
-
     tree.write("config/config.xml")
 
     # generate unit tests from user json
     if generate_unit_tests_activated:
         generate_unit_tests_from_json(dir)
-
 
     return job_name, dir
