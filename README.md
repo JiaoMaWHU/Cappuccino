@@ -5,5 +5,3 @@ This tool makes testing easy. Go have a cup of your favorite Cappuccino and wait
 
 1. Make sure you have installed the packages in requirement.txt using apt-get
 2. Modify config/jenkins.json to set your settings
-3. Note for dir in creating new jobs, the path must end with a slash
-4. Remember to change the password in cappuccino.py
