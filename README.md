@@ -6,3 +6,5 @@
 #### 1. Install and set up jenkins according to `setup.md`
 #### 2. Make sure you have installed all the packages in `requirement.txt` using `apt-get install`
 #### 3. Modify `config/jenkins.json` to set your jenkins configurations
+
+ + MIT Licensed. Copyright (c) 2019 Jinxin Ma, Jianhui Chen, Weiming Wang
