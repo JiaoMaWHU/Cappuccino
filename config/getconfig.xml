@@ -33,8 +33,14 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd /home/class/Desktop/test_sample/
-nosetests --cover-inclusive --with-coverage --cover-erase -v --traverse-namespace &gt; /home/class/Desktop/test_sample/output 2&gt;&amp;1
+python /home/class/Desktop/testing/Cappuccino/generate_unit_tests.py /home/class/Desktop/test_sample/
+nosetests -v --with-coverage --cover-erase &gt; /home/class/Desktop/test_sample/output 2&gt;&amp;1
  cd ../ 
+echo "
+***********************************************
+************ Code Style results: **************
+***********************************************
+" &gt;&gt; /home/class/Desktop/test_sample/output
 pylint -f parseable -d I0011,R0801 test_sample | tee -a /home/class/Desktop/test_sample/output</command>
     </hudson.tasks.Shell>
   </builders>

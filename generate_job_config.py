@@ -9,9 +9,10 @@ def generate_config_from_input():
     dir = raw_input()
     project_name = os.path.basename(os.path.normpath(dir))
     ENTER_WORKSPACE = "cd {}".format(dir)
-    NOSETEST = "nosetests --cover-inclusive "
+    NOSETEST = "nosetests -v "
     # fixme: problem here, only support cover package here 
     MOVEBACK = " cd ../ "
+    HEADER_PYLINT = "echo \"\n***********************************************\n************ Code Style results: **************\n***********************************************\n\" >> {}output".format(dir)
     PYLINT = "pylint -f parseable -d I0011,R0801 {} | tee -a {}output".format(project_name, dir)
     raw_instructions = [ENTER_WORKSPACE]
 
@@ -36,10 +37,6 @@ def generate_config_from_input():
         flag = raw_input()
         if flag == "y":
             NOSETEST += '--cover-erase '
-        print("** Be more verbose? y/n")
-        flag = raw_input()
-        if flag == "y":
-            NOSETEST += '-v '
         print("** Traverse through all path entries of a namespace package? y/n")
         flag = raw_input()
         if flag == "y":
@@ -60,6 +57,7 @@ def generate_config_from_input():
     NOSETEST += '> {}output 2>&1'.format(dir)
     raw_instructions.append(NOSETEST)
     raw_instructions.append(MOVEBACK)
+    raw_instructions.append(HEADER_PYLINT)
     raw_instructions.append(PYLINT)
 
     instructions = "\n".join(raw_instructions)
